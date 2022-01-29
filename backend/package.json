@@ -8,7 +8,8 @@
     "build": "cd build && make",
     "install": "cd build && cmake ..",
     "clean": "rm -rf build && mkdir build",
-    "compile": "g++ -o build/rdl.server src/App.cpp"
+    "compile": "g++ -o build/rdl.server src/App.cpp",
+    "clone-node": "wget https://nodejs.org/dist/v17.4.0/node-v17.4.0-linux-x64.tar.xz && tar -xvf node-v17.4.0-linux-x64.tar.xz && mv node-v17.4.0-linux-x64 node && rm node-v17.4.0-linux-x64.tar.xz"
   },
   "keywords": [],
   "author": "",

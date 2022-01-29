@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useTranslation, withTranslation } from "react-i18next";
-import {BrowserView, MobileView, isMobile} from 'react-device-detect';
+import { BrowserView, MobileView, isMobile } from "react-device-detect";
 import { Dialog, Transition } from "@headlessui/react";
-import { BottomSheet } from 'react-spring-bottom-sheet'
+import { BottomSheet } from "react-spring-bottom-sheet";
 export default function Dock() {
   const { t, i18n } = useTranslation();
   let [isOpen, setIsOpen] = useState(false);
@@ -15,31 +15,31 @@ export default function Dock() {
     setIsOpen(true);
   }
 
-  function closeSheet(){
+  function closeSheet() {
     sheetIsOpen(false);
   }
-  
-  function openSheet(){
+
+  function openSheet() {
     sheetIsOpen(true);
   }
   return (
-      <div className="flex w-max md:space-x-2 h-14 flex-row justify-center items-end bg-gradient-to-t from-branding/50 to-blush/20 backdrop-blur-md fixed bottom-0 md:bottom-2 left-0 right-0 px-2 bg-opacity-10 m-auto rounded-t-xl md:rounded-xl">
-        <button className="hidden md:flex bg-blush/40 dark:bg-violet-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-blush duration-300">
-          <i className="fad group-hover:rotate-[360deg] duration-1000 fa-user-robot text-2xl text-blush dark:text-violet-400 select-none w-full"></i>
-        </button>
-        <button className="hidden md:flex bg-red-500/40 dark:bg-warning/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-red-600 dark:hover:focus:ring-warning duration-300">
-          <i className="fad group-hover:rotate-[360deg] duration-1000 fa-server text-2xl text-red-600 dark:text-warning select-none w-full"></i>
-        </button>
-        <button className="hidden md:flex bg-blue-500/40 dark:bg-success/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-blue-600 dark:hover:focus:ring-success duration-300">
-          <i className="text-center fad group-hover:rotate-[360deg] duration-1000 fa-user text-2xl text-blue-600 dark:text-success select-none w-full"></i>
-        </button>
-        <button className="hidden md:flex bg-green-600/30 dark:bg-red-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-green-600 dark:hover:focus:ring-red-500 duration-300">
-          <i className="fad group-hover:rotate-[360deg] duration-1000 fa-icons text-2xl text-green-800 dark:text-red-400 select-none w-full"></i>
-        </button>
-        <button className="md:hidden space-x-0 bg-green-600/30 dark:bg-red-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-green-600 dark:hover:focus:ring-red-500 duration-300">
-          <i className="fad group-hover:rotate-[360deg] duration-1000 fa-list text-2xl text-green-800 dark:text-red-400 select-none w-full"></i>
-        </button>
-        <BrowserView>
+    <div className="flex w-max md:space-x-2 h-14 flex-row justify-center items-end bg-gradient-to-t from-branding/50 to-blush/20 backdrop-blur-md fixed bottom-0 md:bottom-2 left-0 right-0 px-2 bg-opacity-10 m-auto rounded-t-xl md:rounded-xl">
+      <button className="hidden md:flex bg-blush/40 dark:bg-violet-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-blush duration-300">
+        <i className="fad group-hover:rotate-[360deg] duration-1000 fa-user-robot text-2xl text-blush dark:text-violet-400 select-none w-full"></i>
+      </button>
+      <button className="hidden md:flex bg-red-500/40 dark:bg-warning/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-red-600 dark:hover:focus:ring-warning duration-300">
+        <i className="fad group-hover:rotate-[360deg] duration-1000 fa-server text-2xl text-red-600 dark:text-warning select-none w-full"></i>
+      </button>
+      <button className="hidden md:flex bg-blue-500/40 dark:bg-success/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-blue-600 dark:hover:focus:ring-success duration-300">
+        <i className="text-center fad group-hover:rotate-[360deg] duration-1000 fa-user text-2xl text-blue-600 dark:text-success select-none w-full"></i>
+      </button>
+      <button className="hidden md:flex bg-green-600/30 dark:bg-red-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-green-600 dark:hover:focus:ring-red-500 duration-300">
+        <i className="fad group-hover:rotate-[360deg] duration-1000 fa-icons text-2xl text-green-800 dark:text-red-400 select-none w-full"></i>
+      </button>
+      <button className="md:hidden space-x-0 bg-green-600/30 dark:bg-red-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-green-600 dark:hover:focus:ring-red-500 duration-300">
+        <i className="fad group-hover:rotate-[360deg] duration-1000 fa-list text-2xl text-green-800 dark:text-red-400 select-none w-full"></i>
+      </button>
+      <BrowserView>
         <>
           <button
             className="ml-2 md:ml-0 group transition w-10 h-10 -translate-y-2 align-bottom hover:-translate-y-4 hover:scale-110 duration-300"
@@ -71,7 +71,7 @@ export default function Dock() {
 
                 {/* This element is to trick the browser into centering the modal contents. */}
                 {/*<span className="inline-block h-screen align-middle" aria-hidden="true"> */}
-                  {/*&#8203;*/}
+                {/*&#8203;*/}
                 {/*</span>*/}
                 <Transition.Child
                   as={Fragment}
@@ -115,9 +115,9 @@ export default function Dock() {
             </Dialog>
           </Transition>
         </>
-        </BrowserView>
-        <MobileView>
-          <>
+      </BrowserView>
+      <MobileView>
+        <>
           <button
             className="sm:ml-2 md:ml-0 group transition w-10 h-10 -translate-y-2 align-bottom hover:-translate-y-4 hover:scale-110 duration-300"
             onClick={openSheet}
@@ -127,21 +127,23 @@ export default function Dock() {
               src="/logo.png"
             ></img>
           </button>
-          <BottomSheet open={sheetOpen}>Hello, Please see me, I am very underrated :(</BottomSheet>
-          </>
-        </MobileView>
-        <button className="hidden md:flex bg-green-600/30 dark:bg-red-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-green-600 dark:hover:focus:ring-red-500 duration-300">
-          <i className="fad group-hover:rotate-[360deg] duration-1000 fa-laugh text-2xl text-green-800 dark:text-red-400 select-none w-full"></i>
-        </button>
-        <button className="hidden md:flex bg-blue-500/40 dark:bg-success/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-blue-600 dark:hover:focus:ring-success duration-300">
-          <i className="fad group-hover:rotate-[360deg] duration-1000 fa-portrait text-2xl text-blue-600 dark:text-success  select-none w-full"></i>
-        </button>
-        <button className="hidden md:flex bg-red-500/40 dark:bg-warning/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-red-600 dark:hover:focus:ring-warning duration-300">
-          <i className="fad group-hover:rotate-[360deg] duration-1000 fa-pager text-2xl text-red-600 dark:text-warning select-none w-full"></i>
-        </button>
-        <button className="ml-2 bg-blush/40 dark:bg-violet-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-blush duration-300">
-          <i className="fad group-hover:rotate-[360deg] duration-1000 fa-pencil-paintbrush text-2xl text-blush dark:text-violet-400 select-none w-full"></i>
-        </button>
-      </div>
+          <BottomSheet open={sheetOpen}>
+            Hello, Please see me, I am very underrated :(
+          </BottomSheet>
+        </>
+      </MobileView>
+      <button className="hidden md:flex bg-green-600/30 dark:bg-red-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-green-600 dark:hover:focus:ring-red-500 duration-300">
+        <i className="fad group-hover:rotate-[360deg] duration-1000 fa-laugh text-2xl text-green-800 dark:text-red-400 select-none w-full"></i>
+      </button>
+      <button className="hidden md:flex bg-blue-500/40 dark:bg-success/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-blue-600 dark:hover:focus:ring-success duration-300">
+        <i className="fad group-hover:rotate-[360deg] duration-1000 fa-portrait text-2xl text-blue-600 dark:text-success  select-none w-full"></i>
+      </button>
+      <button className="hidden md:flex bg-red-500/40 dark:bg-warning/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-red-600 dark:hover:focus:ring-warning duration-300">
+        <i className="fad group-hover:rotate-[360deg] duration-1000 fa-pager text-2xl text-red-600 dark:text-warning select-none w-full"></i>
+      </button>
+      <button className="ml-2 bg-blush/40 dark:bg-violet-500/40 group transition-all w-10 h-10 -translate-y-2 align-bottom p-2 hover:-translate-y-4 hover:scale-110 rounded-lg shadow-xl hover:rounded-2xl hover:shadow-2xl hover:focus:outline-none hover:focus:ring hover:focus:ring-blush duration-300">
+        <i className="fad group-hover:rotate-[360deg] duration-1000 fa-pencil-paintbrush text-2xl text-blush dark:text-violet-400 select-none w-full"></i>
+      </button>
+    </div>
   );
 }

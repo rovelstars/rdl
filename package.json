@@ -42,5 +42,9 @@
         "cache": false
       }
     }
+  },
+  "dependencies": {
+    "prettier": "^2.5.1",
+    "prettier-plugin-tailwind": "^2.2.12"
   }
 }

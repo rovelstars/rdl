@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <zmq.hpp>
+#include "node/node_api.h"
 
 void run() {
 

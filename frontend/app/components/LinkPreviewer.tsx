@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link} from "remix";;
+import { Link } from "remix";
 
 import metascraper from "metascraper";
 import metascraperDescription from "metascraper-description";

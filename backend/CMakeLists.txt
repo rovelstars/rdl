@@ -41,7 +41,7 @@ target_link_libraries(${PROJECT_NAME}
 # Specify includes
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    
+    node/include/node
 )
  
 # Set C++ version

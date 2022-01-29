@@ -23,6 +23,8 @@
     "immutable": "4",
     "jsonx": "^1.10.3",
     "metascraper": "^5.25.7",
+    "prettier": "^2.5.1",
+    "prettier-plugin-tailwind": "^2.2.12",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.0",
     "react-device-detect": "^2.1.2",

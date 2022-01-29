@@ -13,6 +13,7 @@ datasource db {
 model Bot {
   // Define a field named id
   id            String  @id
+  //
   // Define a field named name
   username      String
   // Define a field named avatar
@@ -122,7 +123,7 @@ model Team {
 // User is a model, the user has an array of bots, avatarURL, name, discriminator, id as identifier, owner of teams, emoji, etc
 model User {
   // id is the id of the user, is a string, is a snowflake
-  id            String    @id
+  id            String     @id
   // bots is an array of bots, is a relation to the Bot model
   bots          Bot[]
   // avatarURL is a string, is optional
@@ -136,13 +137,13 @@ model User {
   // emojis is an array of emojis, is a relation to the Emoji model
   emoji         Emoji[]
   // theme is a string, is optional and defaults to "default"
-  theme         String    @default("default")
+  theme         String     @default("default")
   //darkmode is a boolean, is optional and defaults to false
-  darkmode      Boolean   @default(false)
+  darkmode      Boolean    @default(false)
   //lastLogin is a timestamp, is optional and defaults to current timestamp
-  lastLogin     DateTime  @default(now())
+  lastLogin     DateTime   @default(now())
   //joinedAt is a timestamp, is optional and defaults to current timestamp
-  joinedAt      DateTime  @default(now())
+  joinedAt      DateTime   @default(now())
   // key is a string, is optional and defaults to empty value
   key           String?
   // email is a string, is optional and defaults to empty value
@@ -160,9 +161,14 @@ model User {
   //nitro is a boolean
   nitro         Boolean
   // rc is an integer, represents rune coins and defaults to 0
-  rc            Int       @default(0)
+  rc            Int        @default(0)
   // money is an integer, represents money and defaults to 0
-  money         Int       @default(0)
+  money         Int        @default(0)
+  //usageData is an boolean, defaults to true
+  usageData     Boolean    @default(true)
+  // listing is an boolean, defaults to true
+  listing       Boolean    @default(true)
+  Template      Template[]
 }
 
 // emoji is a model, has id, name, short, array of tags, and publisher which is related to model user
@@ -227,6 +233,30 @@ model Server {
   votes   Int?           @default(0)
   // locale is an enum of languages, is optional and defaults to "en-US"
   locale  Locale?        @default(EN_US)
+}
+
+// template is a model, code is identifier, name is string, description is optional, usageCount is an int, creator references to User, createdAt is a timestamp, lastSync is a timestamp, guildID is a string, dirty is a boolean
+model Template {
+  // code is the code of the template, is a string, is a snowflake
+  code        String   @id
+  // name is a string, is optional
+  name        String?
+  // description is a string, is optional
+  description String?
+  // usageCount is an int, is optional and defaults to 0
+  usageCount  Int?     @default(0)
+  // creator is a relation to the User model
+  creator     User     @relation(fields: [creatorId], references: [id])
+  // creatorId is the id of the creator, is a string, references to the User model
+  creatorId   String
+  // createdAt is a timestamp, is optional and defaults to current timestamp
+  createdAt   DateTime @default(now())
+  // lastSync is a timestamp, is optional and defaults to current timestamp
+  lastSync    DateTime @default(now())
+  // guildID is a string, is optional and defaults to empty value
+  guildID     String?  @default("")
+  // dirty is a boolean, is optional and defaults to false
+  dirty       Boolean  @default(false)
 }
 
 //botbadges is an enum, the badges of the bot

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { useTranslation, withTranslation } from 'react-i18next';
+import { useTranslation, withTranslation } from "react-i18next";
 
 import { Dialog, Transition } from "@headlessui/react";
 import Navbar from "~/components/Navbar";
