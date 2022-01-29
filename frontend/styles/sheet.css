@@ -1,0 +1,21 @@
+.dark [data-rsbs-overlay] {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--white-text));
+}
+.dark [data-rsbs-root]::after {
+    background-color: rgb(var(--bg));
+}
+.dark [data-rsbs-header]::before {
+  background-color: rgb(var(--white-text));
+}
+
+[data-rsbs-overlay] {
+    background-color: rgb(var(--white-text));
+    color: rgb(var(--black-text));
+  }
+  [data-rsbs-root]::after {
+    background-color: rgb(var(--white-text));
+  }
+  [data-rsbs-header]::before {
+    background-color: rgb(var(--text-darker));
+  }

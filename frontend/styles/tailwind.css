@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+@font-face {
+  font-family: Founders Grotesk;
+  src: url(/fonts/founders-grotesk-bold.woff2) format("woff2");
+  display: swap;
+}
+
+@layer base {
+  [data-theme="default"] {
+    --branding: 255 0 102;
+    --bg: 0 18 32;
+    --bg-lighter: 0 35 61;
+    --success: 55 255 139;
+    --warning: 255 231 76;
+    --blush: 114 76 249;
+    --darker-delta: 94 43 255;
+    --rain: 79 117 155;
+    --scary-dark: 0 4 34;
+    --skyline: 0 255 224;
+    --bsod: 57 115 170;
+    --white-text: 255 255 255;
+    --black-text: 0 0 0;
+    --text-darker: 51 65 85;
+  }
+}

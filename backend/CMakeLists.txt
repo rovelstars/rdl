@@ -1,0 +1,51 @@
+# minimum CMake version required
+cmake_minimum_required(VERSION 3.15)
+
+# Project name, version and description
+project(rdl.server VERSION 1.0 DESCRIPTION "RDL server")
+
+# Create an executable
+add_executable(${PROJECT_NAME}
+    src/App.cpp
+    # your others files...
+)
+
+# add dependencies
+include(../CPM.cmake)
+CPMAddPackage(
+  NAME Ccache.cmake
+  GITHUB_REPOSITORY TheLartians/Ccache.cmake
+  VERSION 1.2
+)
+CPMAddPackage("gh:adeharo9/cpp-dotenv@1.0.0-alpha")
+CPMAddPackage("gh:oatpp/oatpp#1.3.0")
+CPMAddPackage("gh:zeromq/cppzmq#v4.8.1")
+CPMAddPackage(
+    NAME jtv_libpqxx
+    VERSION 7.6.0
+    URL https://github.com/jtv/libpqxx/archive/refs/tags/7.6.0.zip
+)
+
+# package lock to lock down to specific versions of deps
+CPMUsePackageLock(package-lock.cmake)
+
+# Linking libraries
+
+target_link_libraries(${PROJECT_NAME}
+    cpp_dotenv
+    oatpp
+    pqxx
+    zmq
+)
+ 
+# Specify includes
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    
+)
+ 
+# Set C++ version
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+)

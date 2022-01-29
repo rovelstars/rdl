@@ -1,0 +1,11 @@
+**/node_modules
+.turbo
+bot/build
+backend/build
+backend/.pnpm-debug.log
+bot/.env
+db/.env
+backend/.env
+frontend/app/tailwind.css
+.vscode
+.pnpm-debug.log

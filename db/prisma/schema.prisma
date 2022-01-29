@@ -1,0 +1,323 @@
+// configure the client generator, to use prisma client js
+generator client {
+  provider = "prisma-client-js"
+}
+
+// configure which database to use, in this case we use Postgresql
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Define the schema named Bots
+model Bot {
+  // Define a field named id
+  id            String  @id
+  // Define a field named name
+  username      String
+  // Define a field named avatar
+  // discriminator is the discriminator of the bot
+  discriminator String
+  avatar        String
+  // Define a field named status
+  status        Status?
+
+  // addedAt is the timestamp of when the bot was added, defaults to current timestamp
+  addedAt         DateTime    @default(now())
+  // lib is the library of the bot, is a string thats not longer than 10 characters
+  lib             String      @default("custom")
+  // short is the short description of the bot, is a string, not less than 25 characters and not longer than 200 characters
+  short           String      @db.VarChar(200)
+  // desc is the long description of the bot, is a string, not less than 100 characters and not longer than 3000 characters
+  desc            String      @db.VarChar(3000)
+  // prefix is the prefix of the bot, is a string, not longer than 5 characters, is optional and defaults to "/"
+  prefix          String      @default("/") @db.VarChar(5)
+  // slashed is a boolean, if the bot has slash commands or not
+  slashed         Boolean     @default(false)
+  // card is an object, the card of the bot, is optional
+  card            Card[]
+  // verified is a boolean, if the bot is verified or not
+  verified        Boolean     @default(false)
+  // added is a boolean, if the bot is added or not
+  added           Boolean     @default(false)
+  // code is a string, that defines the authentication code of the bot, is a string
+  code            String
+  // webhook is a url, that defines the webhook url of the web server of the bot, is a URL, optional
+  webhook         String?
+  // supportServer is the support server id of the bot, is a snowflake, optional
+  supportServer   String?
+  // bg is the background image of the bot, is a string, is a URL, optional
+  bg              String?
+  // git is the git url of the bot, is a string, is a URL, optional
+  git             String?
+  // opensourced is a boolean, its true if git is not null, false otherwise
+  opensourced     Boolean     @default(false)
+  // website is the website of the bot, is a string, is a URL, optional
+  website         String?
+  // donate is the donate url of the bot, is a string, is a URL, optional
+  donate          String?
+  // perms is integer, the permissions of the bot, is optional and defaults to 0
+  perms           Int         @default(0)
+  // notifyOnAdd is a boolean, if RDL should notify via webhook when it is added, is optional and defaults to false
+  notifyOnAdd     Boolean     @default(false)
+  // servers is integer, the amount of servers the bot is in, is optional and defaults to 0
+  servers         Int         @default(0)
+  // votes is integer, the amount of votes the bot has, defaults to 0
+  votes           Int         @default(0)
+  // badges is an array of strings, the badges of the bot, is optional and defaults to empty array
+  badges          BotBadges[]
+  // slug is a string, the short link discriminator of the bot, is optional and defaults to bot id, url safe
+  slug            String      @db.VarChar(15)
+  // views is integer, the amount of views the bot has, defaults to 0
+  views           Int         @default(0)
+  // unverifiedShort is a string, the unverified short desc of the bot, is optional and defaults to empty string, not less than 25 characters and not longer than 200 characters
+  unverifiedShort String      @default("") @db.VarChar(200)
+  // unverifiedLong is a string, the unverified long desc of the bot, is optional and defaults to empty string, not less than 100 characters and not longer than 3000 characters
+  unverifiedLong  String      @default("") @db.VarChar(3000)
+  // locked is a boolean, if the bot is locked or not, defaults to true if the bot has no mainowner, false otherwise
+  locked          Boolean     @default(false)
+  // team is the team of owners of the bot, is a string, is a snowflake, optional
+  team            Team?       @relation(fields: [teamId], references: [id])
+  teamId          String?
+  // mainowner is a string, the mainowner of the bot
+  mainowner       User        @relation(fields: [mainownerId], references: [id])
+  mainownerId     String
+}
+
+//card is an object, the card of the bot, is optional
+model Card {
+  // title is inside the card, is a string, not longer than 50 characters, is optional
+  title String?
+  // desc is inside the card, is a string, not longer than 200 characters, optional
+  desc  String?
+  // img is inside the card, is a string, is a URL, optional
+  img   String?
+  // bot is a relation to the Bot model
+  bot   Bot     @relation(fields: [id], references: [id])
+  // id is the id of the bot, is a string, references to the Bot model
+  id    String  @id
+}
+
+//team is a model, the team who owns the bot, has an array of bots, owners, avatar, name, uuid as identifier, has a owner
+
+model Team {
+  // id is the id of the team, is a string, is a snowflake
+  id      String   @id
+  // bots is an array of bots, is a relation to the Bot model
+  bots    Bot[]
+  // owners is an array of owners, is a relation to the User model
+  owners  String[]
+  // avatar is a string, is optional
+  avatar  String?
+  // name is a string
+  name    String
+  // owner is a relation to the User model
+  owner   User     @relation(fields: [ownerId], references: [id])
+  // ownerId is the id of the owner, is a string, references to the User model
+  ownerId String
+  //madeat is the timestamp of when the team was made, defaults to current timestamp
+  madeAt  DateTime @default(now())
+}
+
+// User is a model, the user has an array of bots, avatarURL, name, discriminator, id as identifier, owner of teams, emoji, etc
+model User {
+  // id is the id of the user, is a string, is a snowflake
+  id            String    @id
+  // bots is an array of bots, is a relation to the Bot model
+  bots          Bot[]
+  // avatarURL is a string, is optional
+  avatarURL     String
+  // name is a string, is optional
+  name          String
+  // discriminator is a string, is optional
+  discriminator String
+  // teams is an array of teams, is a relation to the Team model
+  teams         Team[]
+  // emojis is an array of emojis, is a relation to the Emoji model
+  emoji         Emoji[]
+  // theme is a string, is optional and defaults to "default"
+  theme         String    @default("default")
+  //darkmode is a boolean, is optional and defaults to false
+  darkmode      Boolean   @default(false)
+  //lastLogin is a timestamp, is optional and defaults to current timestamp
+  lastLogin     DateTime  @default(now())
+  //joinedAt is a timestamp, is optional and defaults to current timestamp
+  joinedAt      DateTime  @default(now())
+  // key is a string, is optional and defaults to empty value
+  key           String?
+  // email is a string, is optional and defaults to empty value
+  email         String?
+  // scopes is an enum array, is optional and defaults to empty array
+  scopes        Scopes[]
+  // sticker is an array of Stickers and is a relation to the Sticker model
+  stickers      Sticker[]
+  // servers is an array of Servers and is a relation to the Server model
+  servers       Server[]
+  //mfa is a boolean
+  mfa           Boolean
+  //banner is a string, is optional
+  banner        String?
+  //nitro is a boolean
+  nitro         Boolean
+  // rc is an integer, represents rune coins and defaults to 0
+  rc            Int       @default(0)
+  // money is an integer, represents money and defaults to 0
+  money         Int       @default(0)
+}
+
+// emoji is a model, has id, name, short, array of tags, and publisher which is related to model user
+model Emoji {
+  // id is the id of the emoji, is a string, is a snowflake
+  id          String   @id
+  // name is a string, is optional
+  name        String?
+  // short is a string, is optional
+  short       String?
+  // tags is an array of strings, is optional
+  tags        String[]
+  // publisher is a relation to the User model
+  publisher   User     @relation(fields: [publisherId], references: [id])
+  // publisherId is the id of the publisher, is a string, references to the User model
+  publisherId String
+}
+
+// sticker is a model, has id, packID, name, desc, tags is an array of strings, type is a boolean, format, uploader
+model Sticker {
+  // id is the id of the sticker, is a string, is a snowflake
+  id         String   @id
+  // packID is the id of the pack, is a string, is a snowflake
+  packID     String
+  // name is a string, is optional
+  name       String?
+  // desc is a string, is optional
+  desc       String?
+  // tags is an array of strings, is optional
+  tags       String[]
+  // type is a boolean, is optional
+  type       Boolean?
+  // format is a string, is optional
+  format     String?
+  // uploader is a relation to the User model
+  uploader   User?    @relation(fields: [uploaderId], references: [id])
+  // uploaderId is the id of the uploader, is a string, references to the User model
+  uploaderId String?
+}
+
+// server is a model, has id, short, desc, avatar, addedAt, owner which references to User, ServerBadges is an enum of badges, slug, votes
+model Server {
+  // id is the id of the server, is a string, is a snowflake
+  id      String         @id
+  // short is a string, is optional
+  short   String?
+  // desc is a string, is optional
+  desc    String?
+  // avatar is a string, is optional
+  avatar  String?
+  // addedAt is a timestamp, is optional
+  addedAt DateTime       @default(now())
+  // owner is a relation to the User model
+  owner   User           @relation(fields: [ownerId], references: [id])
+  // ownerId is the id of the owner, is a string, references to the User model
+  ownerId String
+  // badges is an enum array, is optional and defaults to empty array
+  badges  ServerBadges[]
+  // slug is a string, is optional and defaults to empty value
+  slug    String?
+  // votes is an int, is optional and defaults to 0
+  votes   Int?           @default(0)
+  // locale is an enum of languages, is optional and defaults to "en-US"
+  locale  Locale?        @default(EN_US)
+}
+
+//botbadges is an enum, the badges of the bot
+enum BotBadges {
+  RDLOWNED
+  PARTNERED
+  BLOCKED
+  HACKED
+  DELETED
+  BANNED
+  OSS
+}
+
+//status is an enum, the status of the bot
+enum Status {
+  OFFLINE
+  ONLINE
+  IDLE
+  DND
+}
+
+//scopes is an enum, available discord login scopes that we would like to use
+enum Scopes {
+  EMAIL
+  IDENTIFY
+  BOT
+  GUILDS_JOIN
+  GUILDS
+  CONNECTIONS
+  APPLICATIONS_COMMANDS
+}
+
+// serverbadges is an enum, the badges of the server
+enum ServerBadges {
+  RDLOWNED
+  PARTNERED
+  BLOCKED
+
+}
+
+// userbadges is an enum, the badges of the user
+enum UserBadges {
+  RDLOWNER
+  RDLSTAFF
+  PARTNERED
+  BANNED
+  DONATOR
+  LOCKED
+  BOTOWNER
+  SERVEROWNER
+  TEAMOWNER
+  EMOJIPUBLISHER
+  STICKERUPLOADER
+  BETATESTER
+  READERS
+  VIP
+  CONTRIBUTOR
+  DISCORD_STAFF
+  BUGSMASHER
+}
+
+// enum locale is an enum of languages, is optional and defaults to "en-US"
+enum Locale {
+  EN_US
+  EN_GB
+  BG
+  ZH_CN
+  ZH_TW
+  HR
+  CS
+  DA
+  NL
+  FI
+  FR
+  DE
+  EL
+  HI
+  HU
+  IT
+  JA
+  KO
+  LT
+  NO
+  PL
+  PT_BR
+  RO
+  RU
+  ES_ES
+  SV_SE
+  TH
+  TR
+  UK
+  VI
+}

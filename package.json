@@ -1,0 +1,46 @@
+{
+  "name": "discord-list",
+  "version": "1.0.0",
+  "description": "A place where you can find everything about discord",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm -y"
+  },
+  "workspaces": [
+    "server",
+    "frontend",
+    "bot",
+    "i18n"
+  ],
+  "devDependencies": {
+    "turbo": "^1.0.24"
+  },
+  "turbo": {
+    "baseBranch": "origin/master",
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "build"
+        ],
+        "outputs": [
+          "frontend/public/build/**",
+          "frontend/build/**",
+          "bot/build/**",
+          "server/build/**"
+        ]
+      },
+      "test": {
+        "dependsOn": [
+          "build"
+        ],
+        "outputs": []
+      },
+      "lint": {
+        "outputs": []
+      },
+      "dev": {
+        "cache": false
+      }
+    }
+  }
+}
