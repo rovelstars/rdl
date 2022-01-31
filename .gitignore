@@ -1,10 +1,11 @@
 **/node_modules
 .turbo
-bot/build
+bots/build
 backend/build
 backend/.pnpm-debug.log
 backend/node
-bot/.env
+backend/.env
+bots/.env
 db/.env
 backend/.env
 frontend/app/tailwind.css

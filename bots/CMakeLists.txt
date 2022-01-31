@@ -17,7 +17,7 @@ CPMAddPackage(
   GITHUB_REPOSITORY TheLartians/Ccache.cmake
   VERSION 1.2
 )
-CPMAddPackage("gh:brainboxdotcc/DPP@9.0.16")
+CPMAddPackage("gh:brainboxdotcc/DPP@9.0.18")
 CPMAddPackage("gh:adeharo9/cpp-dotenv@1.0.0-alpha")
 
 

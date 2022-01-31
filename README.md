@@ -37,7 +37,7 @@ chmod a+x ./installdeps.sh
 # now we are going to nvm, nodejs v17.4.0, pnpm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 nvm install 17.4.0
-corepack pnpm@6.28.0
+corepack pnpm@6.29.1
 
 # now we are going to install dependencies of frontend, we expect you know nodejs, remixjs, typescript, reactls, tailwindcss, for this
 # cd discord-list 
@@ -53,9 +53,9 @@ cd ../backend && pnpm i && pnpm run build
 # learn the scripts from backend/package.json
 # if you need to again run a clean install and build of backend, run the following command: "pnpm run clean && pnpm i && pnpm run build"
 
-# moving over to bot, we expect you know c++, dpp & zeromq if you are going to develop bot
-cd ../bot && pnpm i && pnpm run build
-# learn the scripts from bot/package.json
+# moving over to bots, we expect you know c++, dpp & zeromq if you are going to develop bots
+cd ../bots && pnpm i && pnpm run build
+# learn the scripts from bots/package.json
 # if you need to again run a clean install and build of bot, run the following command: "pnpm run clean && pnpm i && pnpm run build"
 ```
 

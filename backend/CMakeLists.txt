@@ -18,6 +18,7 @@ CPMAddPackage(
   VERSION 1.2
 )
 CPMAddPackage("gh:adeharo9/cpp-dotenv@1.0.0-alpha")
+CPMAddPackage("gh:brainboxdotcc/DPP@9.0.18")
 CPMAddPackage("gh:oatpp/oatpp#1.3.0")
 CPMAddPackage("gh:zeromq/cppzmq#v4.8.1")
 CPMAddPackage(
