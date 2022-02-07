@@ -4,7 +4,7 @@ const std::string BASE_URL = "https://discord.com/api/v8";
 #include "dpp/dpp.h"
 //include dotenv library
 #include "dotenv.h"
-// make a main function which will be the entry point of the program
-int main(){
+// make a getBotID function which will be the entry point of the program
+int getBotID(){
     
 }

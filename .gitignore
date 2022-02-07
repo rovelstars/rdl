@@ -7,6 +7,8 @@ backend/node
 backend/.env
 bots/.env
 db/.env
+db/prisma/migrations
+app/out
 backend/.env
 frontend/app/tailwind.css
 .vscode

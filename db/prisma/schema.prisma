@@ -19,10 +19,12 @@ model Bot {
   // Define a field named avatar
   // discriminator is the discriminator of the bot
   discriminator String
+  // Define a field named avatar
   avatar        String
   // Define a field named status
   status        Status?
-
+  // Define a field named css
+  css           String? @default("")
   // addedAt is the timestamp of when the bot was added, defaults to current timestamp
   addedAt         DateTime    @default(now())
   // lib is the library of the bot, is a string thats not longer than 10 characters
@@ -168,7 +170,14 @@ model User {
   usageData     Boolean    @default(true)
   // listing is an boolean, defaults to true
   listing       Boolean    @default(true)
+  //template is an array of template and is a relation to the Template model
   Template      Template[]
+  // bio is a string, is optional and defaults to empty string
+  bio           String     @default("")
+  // about is a string, is optional and defaults to empty string
+  about         String     @default("")
+  // css is a string, is optional and defaults to empty string
+  css           String?   @default("")
 }
 
 // emoji is a model, has id, name, short, array of tags, and publisher which is related to model user
@@ -213,12 +222,14 @@ model Sticker {
 model Server {
   // id is the id of the server, is a string, is a snowflake
   id      String         @id
-  // short is a string, is optional
-  short   String?
-  // desc is a string, is optional
-  desc    String?
-  // avatar is a string, is optional
-  avatar  String?
+  // short is a string
+  short   String
+  // desc is a string, 
+  desc    String
+  // css is a string, is optional
+  css     String? @default("")
+  // avatar is a string
+  avatar  String
   // addedAt is a timestamp, is optional
   addedAt DateTime       @default(now())
   // owner is a relation to the User model

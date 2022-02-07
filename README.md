@@ -49,12 +49,12 @@ cd ../db && pnpm i
 # we used cpm.cmake to provide every package be installable project-wide and not globally, that saves everyone from a lot of troubles, and lets you all to build c++ codes on another os, arch and/or distros. The drawback is that you need to build the dependencies and the code, please build it. In future we may ship builds for the version we stated above, where everyone can download and paste them to your respective folders. Try not to run clean command on the project, it will remove all the builds of dependencies and the code, and you will have to build them again.
 
 # moving over to backend, we expect you know c++, oatpp & zeromq if you are going to develop backend server
-cd ../backend && pnpm i && pnpm run build
+cd ../backend && pnpm run clean && pnpm i && pnpm run build
 # learn the scripts from backend/package.json
 # if you need to again run a clean install and build of backend, run the following command: "pnpm run clean && pnpm i && pnpm run build"
 
 # moving over to bots, we expect you know c++, dpp & zeromq if you are going to develop bots
-cd ../bots && pnpm i && pnpm run build
+cd ../bots && pnpm run clean && pnpm i && pnpm run build
 # learn the scripts from bots/package.json
 # if you need to again run a clean install and build of bot, run the following command: "pnpm run clean && pnpm i && pnpm run build"
 ```
