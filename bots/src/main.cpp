@@ -5,8 +5,8 @@
 #include <nlohmann/json.hpp>
 #include <stdio.h>
 #include <string>
-#include <zmq.hpp>
 #include <thread>
+#include <zmq.hpp>
 
 // include all the commands from commands/rdl folder
 #include "commands/rdl/ping.hpp"
@@ -33,11 +33,11 @@ void private_bot() {
   privatebot.on_ready([&](const auto &event) {
     // make a json object with properties event: "PRIVATE_BOT_READY", and a data
     // object which has bot_username and bot_discriminator
-    nlohmann::json data = {
-        {"data",
-         {{"bot_username", privatebot.me.username},
-          {"bot_discriminator", privatebot.me.discriminator}}},
-        {"event", "PRIVATE_BOT_READY"}};
+    nlohmann::json data = {{"data",
+                            {{"bot_username", privatebot.me.username},
+                             {"bot_discriminator", privatebot.me.discriminator},
+                             {"bot_id", privatebot.me.id}}},
+                           {"event", "PRIVATE_BOT_READY"}};
     // print to console data as string
     std::cout << data.dump() << std::endl;
     // send the json object to the server via socket
@@ -55,7 +55,7 @@ void private_bot() {
   privatebot.start(false);
 }
 
-//make a function called public_bot which will be called in main
+// make a function called public_bot which will be called in main
 void public_bot() {
   dotenv::env.load_dotenv();
   dpp::cluster publicbot(dotenv::env["PUBLIC_CLIENT_TOKEN"]);
@@ -66,8 +66,8 @@ void public_bot() {
   dpp::commandhandler command_handler(&publicbot);
   /* Specifying a prefix of "/" tells the command handler it should also expect
    * slash commands */
-  command_handler.add_prefix(".").add_prefix("/");
-// initialize zmq with context single io thread
+  command_handler.add_prefix(prefix).add_prefix("/");
+  // initialize zmq with context single io thread
   zmq::context_t context{1};
   // construct request and connect
   zmq::socket_t socket{context, zmq::socket_type::req};
@@ -76,11 +76,11 @@ void public_bot() {
   publicbot.on_ready([&](const auto &event) {
     // make a json object with properties event: "PUBLIC_BOT_READY", and a data
     // object which has bot_username and bot_discriminator
-    nlohmann::json data = {
-        {"data",
-         {{"bot_username", publicbot.me.username},
-          {"bot_discriminator", publicbot.me.discriminator}}},
-        {"event", "PUBLIC_BOT_READY"}};
+    nlohmann::json data = {{"data",
+                            {{"bot_username", publicbot.me.username},
+                             {"bot_discriminator", publicbot.me.discriminator},
+                             {"bot_id", publicbot.me.id}}},
+                           {"event", "PUBLIC_BOT_READY"}};
     // print to console data as string
     std::cout << data.dump() << std::endl;
     // send the json object to the server via socket
@@ -109,8 +109,7 @@ void public_bot() {
         "A test ping command",
 
         /* Guild id (omit for a global command) */
-        guild_id
-    );
+        guild_id);
 
     /* NOTE: We must call this to ensure slash commands are registered.
      * This does a bulk register, which will replace other commands

@@ -1,8 +1,8 @@
-#ifndef MyController_hpp
-#define MyController_hpp
+#ifndef Controller_hpp
+#define Controller_hpp
 
 #include "../dto/DTOs.hpp"
-
+#include <iostream>
 #include "oatpp/web/server/api/ApiController.hpp"
 #include "oatpp/core/macro/codegen.hpp"
 #include "oatpp/core/macro/component.hpp"
@@ -12,26 +12,24 @@
 /**
  * Sample Api Controller.
  */
-class MyController : public oatpp::web::server::api::ApiController {
+class Controller : public oatpp::web::server::api::ApiController {
 public:
   /**
    * Constructor with object mapper.
    * @param objectMapper - default object mapper used to serialize/deserialize DTOs.
    */
-  MyController(OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper))
+  Controller(OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper))
     : oatpp::web::server::api::ApiController(objectMapper)
   {}
 public:
-  
   ENDPOINT("GET", "/", root) {
     auto dto = MyDto::createShared();
     dto->statusCode = 200;
     dto->message = "ok";
     return createDtoResponse(Status::CODE_200, dto);
   }
-
 };
 
 #include OATPP_CODEGEN_END(ApiController) //<-- End Codegen
 
-#endif /* MyController_hpp */
+#endif /* Controller_hpp */

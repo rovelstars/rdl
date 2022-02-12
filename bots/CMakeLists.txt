@@ -32,11 +32,12 @@ CPMAddPackage(
 CPMUsePackageLock(package-lock.cmake)
 
 # Linking libraries
-
+find_package(Threads REQUIRED)
 target_link_libraries(${PROJECT_NAME}
     dpp
     cpp_dotenv
     zmq
+    ${CMAKE_THREAD_LIBS_INIT}
 )
  
 # Specify includes

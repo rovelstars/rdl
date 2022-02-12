@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 
 # Project name, version and description
 project(rdl.server VERSION 1.0 DESCRIPTION "RDL server")
-
+set(DAMQP-CPP_LINUX_TCP "ON")
 # Create an executable
 add_executable(${PROJECT_NAME}
     src/App.cpp
@@ -20,11 +20,7 @@ CPMAddPackage(
 CPMAddPackage("gh:adeharo9/cpp-dotenv@1.0.0-alpha")
 CPMAddPackage("gh:oatpp/oatpp#1.3.0")
 CPMAddPackage("gh:zeromq/cppzmq#v4.8.1")
-CPMAddPackage(
-    NAME jtv_libpqxx
-    VERSION 7.6.0
-    URL https://github.com/jtv/libpqxx/archive/refs/tags/7.6.0.zip
-)
+CPMAddPackage("gh:cpp-redis/cpp_redis#master")
 CPMAddPackage(
   NAME nlohmann_json
   VERSION 3.10.5
@@ -36,18 +32,21 @@ CPMAddPackage(
 CPMUsePackageLock(package-lock.cmake)
 
 # Linking libraries
+find_package(Threads REQUIRED)
 
 target_link_libraries(${PROJECT_NAME}
     cpp_dotenv
     oatpp
-    pqxx
     zmq
+    cpp_redis
+    ${CMAKE_THREAD_LIBS_INIT}
 )
  
 # Specify includes
 target_include_directories(${PROJECT_NAME} PRIVATE
     node/include
     ${nlohmann_json_SOURCE_DIR}/include
+    ${cpp_redis_SOURCE_DIR}/includes
 )
  
 # Set C++ version
