@@ -37,6 +37,7 @@ module.exports = {
       fontFamily: {
         display: ['"Founders Grotesk"', "arial"],
         body: ["Quicksand", "arial"],
+        heading: ["Cubano", "arial"],
       },
     },
   },

@@ -1,3 +1,6 @@
+*,*:focus,*:hover{
+  outline:none;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +10,11 @@
 @font-face {
   font-family: Founders Grotesk;
   src: url(/fonts/founders-grotesk-bold.woff2) format("woff2");
+  display: swap;
+}
+@font-face {
+  font-family: Cubano;
+  src: url(/fonts/cubano.ttf) format("truetype");
   display: swap;
 }
 
@@ -27,4 +35,14 @@
     --black-text: 0 0 0;
     --text-darker: 51 65 85;
   }
+}
+
+
+  .md\:hero-bg{
+    background-image: url("/bg-dark.svg");
+  }
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
 }

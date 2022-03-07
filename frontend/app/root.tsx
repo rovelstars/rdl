@@ -5,9 +5,10 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  MetaFunction
 } from "remix";
 import i18n from "./i18n";
-import type { MetaFunction } from "remix";
+ import { useEffect } from "react";
 
 import styles from "./tailwind.css";
 import sheetstyle from "../styles/sheet.css";
@@ -33,6 +34,7 @@ export const meta: MetaFunction = () => {
 
 export default function App() {
   //i18n.changeLanguage("hi");
+
   return (
     <html lang="en" className="dark">
       <head>
@@ -41,7 +43,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body data-theme="default">
+      <body data-theme="default" className="min-h-screen bg-gradient-to-t from-white-text to-rain dark:from-scary-dark dark:to-bg">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

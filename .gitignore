@@ -1,10 +1,11 @@
 **/node_modules
 .turbo
 bots/build
-backend/build
-backend/.pnpm-debug.log
-backend/node
-backend/.env
+old_backend/build
+runecoins/build
+old_backend/.pnpm-debug.log
+old_backend/node
+old_backend/.env
 bots/.env
 db/.env
 db/prisma/migrations
@@ -12,4 +13,5 @@ app/out
 backend/.env
 frontend/app/tailwind.css
 .vscode
-.pnpm-debug.log
+**/.pnpm-debug.log
+backend/target

@@ -329,4 +329,78 @@ void warn(std::string type, std::string message) {
               << message << "\"}" << std::endl;
   }
 }
+// make a function called success which logs to the console at success level, takes in
+// 2 parameters: type and message
+void success(std::string type, std::string message) {
+  // convert type to upper case
+  std::transform(type.begin(), type.end(), type.begin(), ::toupper);
+  // format message with std::format with parameter pack
+  //  if type == "MAIN" make a variable called typecolor and set it to
+  //  BOLDYELLOW
+  std::string typecolor;
+  if (type == "MAIN") {
+    typecolor = BOLDYELLOW;
+  }
+  // if type == "SERVER" make a variable called typecolor and set it to
+  // BOLDYELLOW
+  else if (type == "SERVER") {
+    typecolor = BOLDYELLOW;
+  }
+  // else if type == "CLIENT" make a variable called typecolor and set it to
+  // BOLDCYAN
+  else if (type == "CLIENT") {
+    typecolor = BOLDCYAN;
+  }
+  // else if type == "DB" make a variable called typecolor and set it to
+  // BOLDBLUE
+  else if (type == "DB") {
+    typecolor = BOLDBLUE;
+  }
+  // else if type == "RDLBOT" make a variable called typecolor and set it to
+  // BOLDGREEN
+  else if (type == "RDLBOT") {
+    typecolor = BOLDGREEN;
+  }
+  // else if type == "ROVELBOT" make a variable called typecolor and set it to
+  // BOLDGREEN
+  else if (type == "ROVELBOT") {
+    typecolor = BOLDGREEN;
+  }
+  // else if type == "LOCKDOWN" make a variable called typecolor and set it to
+  // BOLDRED
+  else if (type == "LOCKDOWN") {
+    typecolor = BOLDRED;
+  }
+  // else if type == "SIGNAL" make a variable called typecolor and set it to
+  // BOLDRED
+  else if (type == "SIGNAL") {
+    typecolor = BOLDRED;
+  }
+  // else if type == "QUEUE" make a variable called typecolor and set it to
+  // BOLDCYAN
+  else if (type == "QUEUE") {
+    typecolor = BOLDCYAN;
+  } else {
+    typecolor = BOLDWHITE;
+  }
+  // get a formatted time string and store it in tm
+  auto t = std::time(nullptr);
+  auto tm = *std::localtime(&t);
+  std::ostringstream oss;
+  oss << std::put_time(&tm, "%d-%m-%Y %S:%M:%H");
+  auto timestamp =
+      duration_cast<milliseconds>(system_clock::now().time_since_epoch())
+          .count();
+  // concate oss and timestamp and put in variable time
+  std::string time = oss.str() + " " + std::to_string(timestamp);
+  // print to the console at success level
+  if (!prod()) {
+    std::cout << GREEN << " W " << RESET << "| " << MAGENTA << time << RESET
+              << " | " << typecolor << type << RESET << " : " << message
+              << std::endl;
+  } else {
+    std::cout << "{\"lvl\":\"success\",\"type\":\"" << type << "\",\"msg\":\""
+              << message << "\"}" << std::endl;
+  }
+}
 } // namespace loggy

@@ -19,6 +19,7 @@
     "@remix-run/serve": "^1.1.1",
     "chart.js": "^3.7.0",
     "draft-js": "^0.11.7",
+    "framer-motion": "^6.2.8",
     "i18next": "^21.6.5",
     "immutable": "4",
     "jsonx": "^1.10.3",

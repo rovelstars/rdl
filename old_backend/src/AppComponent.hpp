@@ -51,8 +51,9 @@ public:
    *  Create ObjectMapper component to serialize/deserialize DTOs in Contoller's
    * API
    */
+   //uncomment if you use DTOs
   OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::data::mapping::ObjectMapper>,
-                         apiObjectMapper)
+                       apiObjectMapper)
   ([] { return oatpp::parser::json::mapping::ObjectMapper::createShared(); }());
 };
 

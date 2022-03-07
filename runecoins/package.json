@@ -1,0 +1,28 @@
+{
+  "name": "rune",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.cpp",
+  "scripts": {
+    "test": "echo \"Tests are itself ran during builds\" && exit 1",
+    "build": "cd build && make",
+    "install": "cd build && cmake ..",
+    "clean": "rm -rf build && mkdir build",
+    "compile": "g++ -o build/rdl.server src/App.cpp"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "turbo": {
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "build"
+        ],
+        "outputs": [
+          "build/**"
+        ]
+      }
+    }
+  }
+}

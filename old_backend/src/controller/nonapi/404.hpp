@@ -1,25 +1,25 @@
-#ifndef APIController_hpp
-#define APIController_hpp
+#ifndef NonAPI404_hpp
+#define NonAPI404_hpp
 #include OATPP_CODEGEN_BEGIN(ApiController) //<-- Begin Codegen
 /**
  *  Api Controller.
  */
-class APIController : public oatpp::web::server::api::ApiController {
+class NonAPI404 : public oatpp::web::server::api::ApiController {
 public:
   /**
    *  Constructor with object mapper.
    *  @param objectMapper - default object mapper used to serialize/deserialize
    * DTOs.
    */
-  APIController(OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper))
+  NonAPI404(OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper))
       : oatpp::web::server::api::ApiController(objectMapper) {}
 
 public:
-  ENDPOINT("GET", "/api", root) {
-    auto dto = MyDto::createShared();
-    dto->statusCode = 200;
-    dto->message = "ok";
-    return createDtoResponse(Status::CODE_200, dto);
+  ENDPOINT("GET", "/*", root) {
+    //create nlohmann json object with statusCode and message
+    auto json = nlohmann::json::object();
+    json["statusCode"] = 404;
+    return createResponse(Status::CODE_404, json.dump());
   }
 };
 #include OATPP_CODEGEN_END(ApiController) //<-- End Codegen

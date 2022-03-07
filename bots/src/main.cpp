@@ -36,7 +36,7 @@ void private_bot() {
     nlohmann::json data = {{"data",
                             {{"bot_username", privatebot.me.username},
                              {"bot_discriminator", privatebot.me.discriminator},
-                             {"bot_id", privatebot.me.id}}},
+                             {"bot_id", std::to_string(privatebot.me.id)}}},
                            {"event", "PRIVATE_BOT_READY"}};
     // print to console data as string
     std::cout << data.dump() << std::endl;
@@ -79,7 +79,7 @@ void public_bot() {
     nlohmann::json data = {{"data",
                             {{"bot_username", publicbot.me.username},
                              {"bot_discriminator", publicbot.me.discriminator},
-                             {"bot_id", publicbot.me.id}}},
+                             {"bot_id", std::to_string(publicbot.me.id)}}},
                            {"event", "PUBLIC_BOT_READY"}};
     // print to console data as string
     std::cout << data.dump() << std::endl;

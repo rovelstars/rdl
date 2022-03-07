@@ -1,3 +1,8 @@
+//#include "../controller/nonapi/index.hpp"
+//#include "../controller/api/v1/index.hpp"
+#include "../controller/api/v1/404.hpp"
+//#include "../controller/nonapi/404.hpp"
+
 namespace run_server{
     void execute() {
   dotenv::env.load_dotenv();
@@ -8,8 +13,10 @@ namespace run_server{
   OATPP_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, router);
 
   /* Create Controller and add all of its endpoints to router */
-  router->addController(std::make_shared<APIController>());
-  router->addController(std::make_shared<Controller>());
+  //router->addController(std::make_shared<API>());
+  router->addController(std::make_shared<API404>());
+  //router->addController(std::make_shared<NonAPI>());
+  //router->addController(std::make_shared<NonAPI404>());
 
   /* Get connection handler component */
   OATPP_COMPONENT(std::shared_ptr<oatpp::network::ConnectionHandler>,

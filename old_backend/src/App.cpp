@@ -1,6 +1,4 @@
 #include "./AppComponent.hpp"
-#include "./controller/Controller.hpp"
-#include "./controller/api/v1/index.hpp"
 #include "./utils/loggy.hpp"
 #include "oatpp/network/Server.hpp"
 #include <dotenv.h>

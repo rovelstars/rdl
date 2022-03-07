@@ -1,9 +1,10 @@
-#include <zmq.hpp>
-#include <string>
 #include <iostream>
+#include <string>
+#include <zmq.hpp>
+#include "../oauth2/login.hpp"
 
-namespace run_zmq{
-    void execute() {
+namespace run_zmq {
+void execute() {
   // log hello world
   loggy::info("QUEUE", "Starting zmq server");
 
@@ -33,10 +34,14 @@ namespace run_zmq{
       // get bot username and discriminator
       std::string bot_username = request_json["data"]["bot_username"];
       int bot_discriminator = request_json["data"]["bot_discriminator"];
+      std::string bot_id = request_json["data"]["bot_id"];
       // log the bot_username, and bot_discriminator
-      loggy::info("RDLBOT", ("Logged in as " + bot_username + "#" +
-                             std::to_string(bot_discriminator)));
+      loggy::info("RDLBOT",
+                  ("Logged in as " + bot_username + "#" +
+                   std::to_string(bot_discriminator) + " [" + bot_id + "]"));
       lockdownSerice::bots(false);
+      //send the bot id to oauth2
+      oauth2::updateBotID(std::stoull(bot_id));
       // make a json response {status: "success"}
       nlohmann::json response = {{"status", "success"}};
       // reply to client
@@ -46,9 +51,11 @@ namespace run_zmq{
       // get bot username and discriminator
       std::string bot_username = request_json["data"]["bot_username"];
       int bot_discriminator = request_json["data"]["bot_discriminator"];
+      std::string bot_id = request_json["data"]["bot_id"];
       // log the bot_username, and bot_discriminator
-      loggy::info("ROVELBOT", ("Logged in as " + bot_username + "#" +
-                               std::to_string(bot_discriminator)));
+      loggy::info("ROVELBOT",
+                  ("Logged in as " + bot_username + "#" +
+                   std::to_string(bot_discriminator) + " [" + bot_id + "]"));
       lockdownSerice::bots(false);
       // make a json response {status: "success"}
       nlohmann::json response = {{"status", "success"}};
@@ -57,4 +64,4 @@ namespace run_zmq{
     }
   }
 }
-}
+} // namespace run_zmq
