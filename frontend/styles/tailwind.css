@@ -39,7 +39,7 @@
 
 
   .md\:hero-bg{
-    background-image: url("/bg-dark.svg");
+    background-image: url("/img/bg-dark.svg");
   }
 
 ::-webkit-scrollbar {

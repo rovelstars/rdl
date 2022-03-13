@@ -1,52 +1,42 @@
 {
-  "private": true,
   "name": "frontend",
+  "version": "1.0.0",
   "description": "",
-  "license": "",
+  "main": "index.js",
   "scripts": {
-    "build": "pnpm run build:css && remix build",
-    "build:css": "tailwindcss -i ./styles/tailwind.css -o ./app/tailwind.css --minify",
-    "dev": "concurrently \"pnpm run dev:css\" \"remix dev\"",
-    "dev:css": "tailwindcss -i ./styles/tailwind.css -o ./app/tailwind.css --watch",
-    "postinstall": "remix setup node",
-    "setup": "pnpm i",
-    "start": "remix-serve build"
-  },
-  "dependencies": {
-    "@builder.io/react": "^1.1.47",
-    "@headlessui/react": "^1.4.2",
-    "@remix-run/react": "^1.1.1",
-    "@remix-run/serve": "^1.1.1",
-    "chart.js": "^3.7.0",
-    "draft-js": "^0.11.7",
-    "framer-motion": "^6.2.8",
-    "i18next": "^21.6.5",
-    "immutable": "4",
-    "jsonx": "^1.10.3",
-    "metascraper": "^5.25.7",
-    "prettier": "^2.5.1",
-    "prettier-plugin-tailwind": "^2.2.12",
-    "react": "^17.0.2",
-    "react-chartjs-2": "^4.0.0",
-    "react-device-detect": "^2.1.2",
-    "react-dom": "^17.0.2",
-    "react-draft-wysiwyg": "^1.14.7",
-    "react-i18next": "^11.15.3",
-    "react-spring-bottom-sheet": "^3.4.0",
-    "remix": "^1.1.1"
-  },
-  "devDependencies": {
-    "@remix-run/dev": "^1.1.1",
-    "@types/react": "^17.0.24",
-    "@types/react-dom": "^17.0.9",
-    "autoprefixer": "^10.4.1",
-    "concurrently": "^6.5.1",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.8",
-    "typescript": "^4.1.2"
+    "dev": "concurrently \"pnpm run dev:js\" \"pnpm run dev:css\"",
+    "build": "pnpm run build:js && pnpm run build:css",
+    "start": "next start",
+    "dev:css": "tailwindcss -i ./styles/tailwind.css -o ./public/css/tailwind.css --watch",
+    "dev:js": "next dev",
+    "build:css": "tailwindcss -i ./styles/tailwind.css -o ./public/css/tailwind.css --minify",
+    "build:js": "next build",
+    "lint": "next lint"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=17.0.0"
   },
-  "sideEffects": false
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "daisyui": "^2.6.4",
+    "i18next": "^21.6.13",
+    "next": "^12.1.0",
+    "next-i18next": "^10.5.0",
+    "react": "^17.0.2",
+    "react-device-detect": "^2.1.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.15.5",
+    "react-query": "^3.34.16",
+    "tailwind-gen": "github:rovelstars/tailwind-gen"
+  },
+  "devDependencies": {
+    "@headlessui/react": "^1.5.0",
+    "@types/node": "^17.0.21",
+    "@types/react": "^17.0.39",
+    "concurrently": "^7.0.0",
+    "tailwindcss": "^3.0.23",
+    "typescript": "^4.6.2"
+  }
 }

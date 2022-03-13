@@ -8,7 +8,7 @@ function setThemeColor(variable) {
 }
 
 module.exports = {
-  content: ["./pages/**/*.{ts,tsx}","./components/**/*.{ts,tsx}","./twgen/**/*.{ts,tsx}"],
+  content: ["./app/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {

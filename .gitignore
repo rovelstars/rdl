@@ -11,7 +11,8 @@ db/.env
 db/prisma/migrations
 app/out
 backend/.env
-frontend/app/tailwind.css
+frontend/public/css/tailwind.css
+frontend/.next
 .vscode
 **/.pnpm-debug.log
 backend/target
